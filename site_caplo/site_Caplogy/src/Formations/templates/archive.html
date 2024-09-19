@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Archive formations</title>
+{% endblock %}
+
+{% block content %}
+    <h1 style="text-align:center;">Archive : "{{ categorie_nom }}"</h1>
+
+    <br><br><br>
+    <div class="container_liste_formations">
+        <div class="formations-container">
+            {% for formation in noms_formations_expirees %}
+                <div class="formation-item">
+                    {% if formation.image %}
+                        <img src="{{ formation.image.url }}" alt="{{ formation.titre }}" class="logo">
+                    {% endif %}
+                    <h2>{{ formation.titre }}</h2>
+                    <p><img src="{% static 'logo_et_fichier_caplogy/lieu.png' %}" style="max-width: 19px;"><strong>  Lieu : {{ formation.lieu }}</strong></p>
+
+                    <p><img src="{% static 'logo_et_fichier_caplogy/calender.png' %}" style="max-width: 19px;">  Date: {{ formation.date|date:"d/m/Y" }}</p>
+                    <button type="submit" >Achat expiré</button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/script.js' %}"></script>
+{% endblock %}

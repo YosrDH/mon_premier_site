@@ -1,0 +1,375 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load custom_filters %}
+
+{% block title %}
+<title xmlns="http://www.w3.org/1999/html">Détail formation</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="background-color:#F5F5F5; border-radius:8px;">
+        <br><br>
+        <div >
+            <h1 style="text-align:center;   color: #51516e;">Préparation à la certification {{formation.titre}}</h1>
+        </div>
+
+        <br><br>
+
+        <div  class="flex-container">
+            <p style="color:black;" ><strong style="  color: #51516e;  text-decoration: underline;">Date:</strong>{{formation.date|date:"d/m/Y" }}</p>
+            <p style="color:black;"><strong  style="  color: #51516e;  text-decoration: underline;">Heure:</strong> {{ formation.heure_debut|format_time }} - {{ formation.heure_fin|format_time }} </p>
+            <p style="color:black;"><strong style="  color: #51516e;  text-decoration: underline;">Inscription avant:</strong> {{formation.inscri_deadline|date:"d/m/Y" }} {{formation.heure_deadline|format_time}}</p>
+            <p style="color:black;"><strong style="  color: #51516e;  text-decoration: underline;">Modalité:</strong> {{formation.lieu}}</p>
+        </div>
+
+        <div class="flex-container">
+            <p style="color:black;"><strong style="  color: #51516e;  text-decoration: underline;">Organisateurs:</strong> {{formation.organisateurs}}</p>
+            <p style="color:black;"><strong style="  color: #51516e;  text-decoration: underline;">Courriel: </strong><a href="mailto:{{formation.email}}">{{formation.email}}</a> </p>
+            <p style="color:black;"><strong style="  color: #51516e;  text-decoration: underline;">Social: </strong><a href="{{ formation.linkedin }}"> <i class="fab fa-linkedin" style="color:black"></i></a>
+                        <a href="{{ formation.google_agenda }}"><i class="fas fa-calendar-alt" style="color:black"></i></a>
+                        <a href="{{formation.yahoo}}"><img src="{% static 'logo_et_fichier_caplogy/yahoo1.png' %}" alt="Yahoo Icon" style="width: 20px; height: 20px;"></a>
+                        <a href="{{formation.outlook}}"><img src="{% static 'logo_et_fichier_caplogy/outlook.png' %}" alt="outlook Icon" style="width: 20px; height: 20px;"></a>
+
+            </p>
+
+        </div>
+
+
+    <br><br>
+        </div>
+<br><br><br>
+    <hr>
+
+    <div >
+
+
+            <ul class= "nav-list">
+                <li class="nav-item"  ><a class="nav-link" href='#objectifs' style="color:white; font-weight: bold; ">objectifs pédagogiques</a></li>
+                <li class="nav-item"><a class="nav-link" href='#public_concerné' style="color:white; font-weight: bold;">Public concerné</a></li>
+                <li class="nav-item"><a class="nav-link" href='#prérequis' style="color:white;font-weight: bold; ">Prérequis</a></li>
+                <li class="nav-item"><a class="nav-link" href='#programme_formation' style="color:white; font-weight: bold;">Programme de la formation</a></li>
+                <li class="nav-item"><a class="nav-link" href='#date_lieu' style="color:white; font-weight: bold;" >Dates et lieux</a></li>
+                <li class="nav-item"><a class="nav-link" href='#avis' style="color:white; font-weight: bold;">Avis clients</a></li>
+
+            </ul>
+
+    </div>
+    <hr>
+
+    <br>
+
+    <div class="container_description">
+
+        <div class="description">
+            {% for categorie in categories %}
+            <a  href="{% url 'archive' category_id=categorie.id%}"> {% for categorie in formation.categorie.all %}
+                                {{ categorie.nom }}
+                                {% if not forloop.last %}, {% endif %}
+                            {% endfor %}</a>
+            {%endfor%}
+            <h1 style="color:black;">{{formation.titre}}</h1>
+
+            {% if formation.image %}
+                    <img src="{{ formation.image.url }}" alt="{{ formation.titre }}" class="logo">
+            {% endif %}
+
+            <pre>{{formation.description}}</pre>
+
+            <hr>
+            <div>
+                <h3 id="objectifs">Objectifs pédagogiques</h3>
+                <pre> {{formation.objectifs}}</pre>
+            </div>
+
+            <hr>
+
+            <div>
+                <h3 id="public_concerné">Public concerné</h3>
+                <table border="1" style="border-collapse: collapse; width: 100%;">
+                    <tr>
+                        <td style="text-align: center;"><strong >Public Visé</strong></td>
+                        <td ><pre>{{formation.public_visé}}</pre></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><strong>Positionnement à l’entrée en formation</strong></td>
+                        <td><pre>{{formation.Positionnement}}</pre></td>
+                    </tr>
+                </table>
+                <hr>
+
+                <table border="1" style="border-collapse: collapse; width: 100%;" >
+                    <tr>
+                        <td style="text-align: center; background-color:#778899;"><strong>Organisation</strong></td>
+                        <td style="text-align: center;background-color:#778899;"><strong>Méthodes pédagogiques</strong></td>
+                        <td style="text-align: center; background-color:#778899;"><strong>Validation</strong></td>
+                        <td style="text-align: center; background-color:#778899;"><strong>Sanction</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td>{{formation.organisation}}</td>
+                        <td>{{formation.methode}}</td>
+                        <td>{{formation.validation}}</td>
+                        <td>{{formation.sanction}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div>
+                <h3 id="prérequis">Prérequis</h3>
+                <pre>{{formation.prérequis}}</pre>
+            </div>
+            <hr>
+
+            <div>
+                <h3 id="programme_formation">Programme de la formation</h3>
+                 <ul class="programme-list">
+                     {% for programme in programmes %}
+
+                            <li class="programme-item">
+                                <button class="day-button" onclick="showModules('{{ programme.id }}')"> {{programme.jour}} <br> {{ programme.titre_jour }}</button>
+                            </li>
+
+                     {% endfor %}
+                 </ul>
+                <br>
+                {% for programme in programmes %}
+                <div id="modules-{{ programme.id }}" class="modules" style="display: none;">
+                    <table  border="1" style="border-collapse: collapse; width: 100%;" class="rounded-table">
+                        {% for module in programme.module_set.all %}
+                            <tr class="module">
+                                 <td class="time-slot">  <img src="{% static 'logo_et_fichier_caplogy/horloge.png' %}" style="max-width: 19px;">     {{ module.heure_debut|format_time }} - {{ module.heure_fin|format_time }}<br>
+                                     <img src="{% static 'logo_et_fichier_caplogy/lieu.png' %}" style="max-width: 19px;">  {{ formation.lieu }}</td>
+
+                                 <td>
+                                    <h4>{{ module.titre }}</h4>
+                                    <pre>{{ module.description }}</pre>
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+                    </table>
+
+                </div>
+            {% endfor %}
+            </div>
+             <hr>
+            <h3>Nos Formateurs</h3>
+            <ul style="list-style-type: none; display: flex; gap: 20px">
+                {% for formateur in formateurs %}
+
+                    <li >
+                        {% if formateur.image %}
+                            <img src="{{ formateur.image.url }}"  class="logo_formateur">
+                        {% endif %}
+                            <br>
+                        <div>
+                            <a href="{{ formateur.linkedin }}"><i class="fab fa-linkedin"></i></a>
+                            {% if formateur.article %}
+                                <a href="{{ formateur.article }}"><i class="fas fa-newspaper"></i></a>
+                            {% endif %}
+                            <div>{{ formateur.nom }}</div>
+                            <div>{{ formateur.specialite }}</div>
+
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <hr>
+
+            <div>
+                <h3 id="date_lieu">Dates et lieux</h3>
+                <div><pre>{{formation.dates_et_lieu_description}}</pre></div>
+                <div>
+                    <table border="1" style="border-collapse: collapse; width: 100%;">
+                        <tr>
+                            <td style="text-align: center; background-color:#778899;"><strong>Dates</strong></td>
+                            <td style="text-align: center; background-color:#778899;"><strong>Lieux</strong></td>
+                            <td style="text-align: center; background-color:#778899;"><strong>Inscription</strong></td>
+                        </tr>
+
+                        {% for date_formation in formation.dates.all %}
+                            <tr>
+                                <td style="text-align: center; ">{{date_formation.date|date:"d/m/Y" }} - {{date_formation.inscription_deadline|date:"d/m/Y"}}</td>
+                                <td style="text-align: center; ">{{ date_formation.lieu }}</td>
+                                <td style="text-align: center;">
+                                    <button >s'inscrire</button>
+                                </td>
+
+                            </tr>
+                        {% empty %}
+                        {%endfor%}
+                    </table>
+                </div>
+            </div>
+            <hr>
+            <div>
+                <h3>Contactez Nous :</h3>
+                <a href="mailto:inscirption@caplogy.com">inscirption@caplogy.com</a>
+            </div>
+            <hr>
+            <div>
+                <h3 id="avis">Avis Clients</h3>
+                <form method="post">
+                    {% csrf_token %}
+
+                <div class="rating">
+                    <input value="5" name="rating" id="star5" type="radio">
+                    <label for="star5"></label>
+                    <input value="4" name="rating" id="star4" type="radio">
+                    <label for="star4"></label>
+                    <input value="3" name="rating" id="star3" type="radio">
+                    <label for="star3"></label>
+                    <input value="2" name="rating" id="star2" type="radio">
+                    <label for="star2"></label>
+                    <input value="1" name="rating" id="star1" type="radio">
+                    <label for="star1"></label>
+                </div>
+                    <br>
+                    <br>
+                <textarea name="commentaire" rows="4" placeholder="Ecrire votre commentaire ici ..."></textarea>
+
+                    <br><br>
+                <button type="submit">Submit Review</button>
+                </form>
+
+            </div>
+            <hr>
+            <div>
+                <h3>Informations pratiques</h3>
+                <div><pre>{{formation.informations_pratiques}}</pre></div>
+            </div>
+            <hr>
+            <div>
+                <h3 >Événements connexes</h3>
+                {% for form in formation.Formations_formationavenir_formations_connexes.all %}
+                    <div style="display: inline-block">
+                        {% if form.image %}
+                            <img src="{{ form.image.url }}" alt="{{ form.titre }}" class="logo">
+                        {% endif %}
+                        <h2 style="color:#51516e;">{{ form.titre }}</h2>
+                        <p  style="color:#51516e;"><img src="{% static 'logo_et_fichier_caplogy/lieu.png' %}" style="max-width: 19px;">Lieu : {{ form.lieu }}</p>
+                        <p style="color:#51516e;"><img src="{% static 'logo_et_fichier_caplogy/calender.png' %}" style="max-width: 19px;">  Date:{{form.date|date:"d/m/Y" }}</p>
+                        <button type="submit" onclick="redirectToPage('{% url 'detail_formation' form.id %}')">Assister</button>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+
+        <div class="bon_examen">
+           <h3>Achat de billets</h3>
+
+            {% for b in billet %}
+                <p>{{ b.titre }}</p>
+            {% endfor %}
+
+            <div >
+
+
+                    {% csrf_token %}
+                    <table  border="1" style="border-collapse: collapse; width: 100%;">
+                        <tr>
+                            <td style="text-align: center; background-color:#778899;"><strong>PRIX DU BILLET :</strong></td>
+                            <td  for="quantity" style="text-align: center; background-color:#778899;"><strong>QUANTITÉ :</strong></td>
+                            <td for="subtotal" style="text-align: center; background-color:#778899;"><strong>SOUS-TOTAL :</strong></td>
+                        </tr>
+                        <tr>
+                            <td >{{formation.prix}} €</td>
+                            <td>
+                                <button type="button" onclick="decreaseQuantity()">-</button>
+                                <input  type="number" id="quantity" name="quantity" value="1" min="1" max="5" onchange="updateSubtotal()" style="border: 1px solid #ccc;  border-radius: .5rem;">
+                                <button type="button" onclick="increaseQuantity()">+</button>
+                            </td>
+                            <td>
+                                <span id="subtotal">{{ formation.prix }} €</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: center; ">
+                                <form id="paypalForm" method="post" action="{% url 'payment_process' formation.id %}" >
+                                    {% csrf_token %}
+                                    <input type="hidden" id="paypalQuantity" name="quantity" value="1">
+                                    <button type="button" onclick="submitPaypalForm()">Achat direct par carte bancaire à travers PayPal</button>
+                                </form>
+                                <form id="stripeForm" method="post" action="{% url 'create_checkout_session' formation.id %}" >
+                                    {% csrf_token %}
+                                    <input type="hidden" id="stripeQuantity" name="quantity" value="1">
+                                    <button type="button" onclick="submitStripeForm()">Achat direct par carte bancaire à travers Stripe</button>
+                                </form>
+                                <button> <a href="https://app.cal.com/caplogyformation/15min?user=caplogyformation&month=2024-07&layout=month_view&date=2024-07-29">Prendre rendez-vous avec un conseiller</a></button>
+                            </td>
+                        </tr>
+                    </table>
+
+                <a href="{% url 'liste_certifications' %}">Besoin d'un bon d'examen? Visitez notre boutique de certifications!</a>
+
+            </div>
+
+
+        </div>
+
+
+        <script src="https://js.stripe.com/v3/"></script>
+
+        <script>
+        function showModules(programmeId) {
+            // Hide all modules sections
+            var modulesSections = document.querySelectorAll('.modules');
+            modulesSections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+
+            // Show the selected modules section
+            var selectedSection = document.getElementById('modules-' + programmeId);
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+            }
+        }
+
+         // Récupérer le prix initial de la formation depuis le span
+        const pricePerUnit = parseFloat('{{ formation.prix }}');
+
+        function updateSubtotal() {
+            const quantity = document.getElementById('quantity').value;
+            const subtotal = pricePerUnit * quantity;
+            document.getElementById('subtotal').innerText = `${subtotal.toFixed(2)} €`;
+        }
+
+        function increaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+            updateSubtotal();
+        }
+
+        function decreaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            if (quantityInput.value > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+                updateSubtotal();
+            }
+        }
+
+
+        function redirectToPage(url) {
+        window.location.href = url;}
+
+function submitPaypalForm() {
+    // Mettez à jour la valeur de l'input caché avec la quantité actuelle
+    document.getElementById('paypalQuantity').value = document.getElementById('quantity').value;
+    document.getElementById('paypalForm').submit();
+}
+
+              function submitStripeForm() {
+            // Mettez à jour la valeur de l'input caché avec la quantité actuelle
+            document.getElementById('stripeQuantity').value = document.getElementById('quantity').value;
+            document.getElementById('stripeForm').submit();
+        }
+    </script>
+
+    </div>
+<br><br>
+{% endblock %}

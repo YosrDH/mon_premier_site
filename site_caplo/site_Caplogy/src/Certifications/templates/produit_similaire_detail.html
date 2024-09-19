@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+<meta property="og:title" content="{{ certification.titre }}" />
+<meta property="og:description" content="{{ certification.description }}" />
+<meta property="og:image" content="{{ certification.image.url }}" />
+<meta property="og:url" content="{{ request.build_absolute_uri }}" />
+<meta property="og:type" content="website" />
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 style="text-align:center; font-family: 'Inter', sans-serif;">{{ produit_similaire.titre }}</h1>
+    <br><br><br>
+    <div class="grid-container">
+        <div class="grid-item">
+            {% if produit_similaire.image %}
+                <img src="{{ produit_similaire.image.url }}" alt="{{ produit_similaire.titre }}" class="img-detail_certif">
+            {% endif %}
+        </div>
+        <div class="grid-item">
+            <p>Prix: {{ produit_similaire.prix }} €</p>
+            <p>{{ produit_similaire.description }}</p>
+            <br>
+            <button type="button" onclick="decreaseQuantity()">-</button>
+            <input  type="number" id="quantity" value="1" min="1" max="5" onchange="updateSubtotal()" style="border: 1px solid #ccc;  border-radius: .5rem;">
+            <button type="button" onclick="increaseQuantity()">+</button>
+            <button type="submit">Ajouter au panier</button>
+            <p><strong>catégorie(s):</strong>
+                {% for categorie in produit_similaire.catégories.all %}
+                    {{categorie.titre}} .
+                {% endfor %}
+            </p>
+            <br>
+            <br>
+            <strong style="font-family: 'Inter', sans-serif; color:white;">Partager ce produit:</strong>
+             <br><br>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">
+                <img src="{% static 'logo_et_fichier_caplogy/facebook.png' %}" alt="Facebook">
+            </a>
+            <a href="https://twitter.com/share?url={{ request.build_absolute_uri }}" target="_blank">
+                <img src="{% static 'logo_et_fichier_caplogy/X.png' %}" alt="Twitter">
+            </a>
+            <a href="https://pinterest.com/pin/create/button/?url={{ request.build_absolute_uri }}" target="_blank">
+                <img src="{% static 'logo_et_fichier_caplogy/pinterest.png' %}" alt="Pinterest">
+            </a>
+            <a href="https://www.linkedin.com/shareArticle?url={{ request.build_absolute_uri }}" target="_blank">
+                <img src="{% static 'logo_et_fichier_caplogy/linkedin.png' %}" alt="LinkedIn">
+            </a>
+             <a href="https://api.whatsapp.com/send?text={{ request.build_absolute_uri }}" target="_blank">
+                <img src="{% static 'logo_et_fichier_caplogy/whatsApp.png' %}" alt="WhatsApp">
+             </a>
+        </div>
+        <div class="grid-item">
+            <div >
+                <h3 style="color:white; font-family: 'Inter', sans-serif;"><strong>Rechercher une formation ou une certification</strong></h3>
+                <form method="GET" action="{% url 'search_certifications' %}" class="form">
+                    <input type="text" name="query" placeholder="Rechrcher un produit" class="multiligne">
+                    <button type="submit" class="btn-style-existant">Rechercher</button>
+                </form>
+            </div>
+            <br>
+            <br>
+            <div>
+                <h3 style="color:white; font-family: 'Inter', sans-serif;">Produits les mieux notés</h3>
+                {% for certification in best_certifications %}
+                     {% if certification.image %}
+                        <img src="{{ certification.image.url }}" alt="{{ certification.titre }}" class="logo_top_rated">
+                     {% endif %}
+                     <br>
+                    <strong style="color:white; font-family: 'Inter', sans-serif;">{{ certification.titre }}</strong>
+                    <p><strong>Prix:</strong> {{ certification.prix }} € </p>
+                 {% endfor %}
+            </div>
+
+        </div>
+    </div>
+    <hr>
+
+    <div class="container_description">
+        <div class="description">
+            <button id="description-btn" onclick="showSection('description')">Description</button>
+            <button id="avis-btn" onclick="showSection('avis')">Avis</button>
+            <hr>
+             <div id="description" class="section-content">
+
+
+                <pre>{{ produit_similaire.desc_detaille }}</pre>
+             </div>
+
+            <div id="avis" class="section-content" style="display: none;">
+                <h3>Donnez votre avis</h3>
+                <form method="post" >
+                    {% csrf_token %}
+
+                    <div class="rating">
+                        <input value="5" name="rating" id="star5" type="radio">
+                        <label for="star5"></label>
+                        <input value="4" name="rating" id="star4" type="radio">
+                        <label for="star4"></label>
+                        <input value="3" name="rating" id="star3" type="radio">
+                        <label for="star3"></label>
+                        <input value="2" name="rating" id="star2" type="radio">
+                        <label for="star2"></label>
+                        <input value="1" name="rating" id="star1" type="radio">
+                        <label for="star1"></label>
+                    </div>
+                    <br>
+                    <br>
+                    <textarea name="commentaire" rows="4" placeholder="Ecrire votre commentaire ici..."></textarea>
+                    <br><br>
+                    <button type="submit">Submit Review</button>
+                </form>
+            </div>
+
+
+        </div>
+
+        <div class="bon_examen">
+            <h3>Produit(s) similaires</h3>
+            <br>
+            {% if produits_similaires%}
+                {% for produit in produits_similaires %}
+                    <div>
+                        {% if produit.image %}
+                            <a  href="">
+                                 <img src="{{ produit.image.url }}"  class="logo">
+                            </a>
+
+                        {% endif %}<br>
+                        <div  >
+                             <strong style="color:white; font-family: 'Inter', sans-serif; color:black">{{produit.titre }}</strong><br>
+                            {{produit.prix}} €
+
+                        </div>
+                    </div>
+                {%endfor%}
+            {%endif%}
+
+        </div>
+    </div>
+    <br><br><br>
+</div>
+
+
+<script>
+    //fonction pour les boutons + et - de la quantité
+    function increaseQuantity() {
+                const quantityInput = document.getElementById('quantity');
+                quantityInput.value = parseInt(quantityInput.value) + 1;
+                updateSubtotal();
+            }
+
+    function decreaseQuantity() {
+        const quantityInput = document.getElementById('quantity');
+        if (quantityInput.value > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+            updateSubtotal();
+            }
+        }
+
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.section-content');
+        sections.forEach(section => {
+            section.style.display = 'none'; // Hide all sections
+        });
+
+        document.getElementById(sectionId).style.display = 'block'; // Show the selected section
+    }
+</script>
+
+{% endblock %}

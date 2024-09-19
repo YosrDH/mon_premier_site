@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>{{categorie.titre}}</title>
+{% endblock %}
+
+{% block content%}
+    <div class="container">
+         <div><h1 style="text-align:center;">{{ categorie.titre }}</h1></div>
+        <br><br><br>
+
+        <div class="container_description">
+            <div class="description">
+                <div >
+                    <ul class="nav-list ">
+                       {% for catégorie in categorie_button %}
+                        <li class="nav-item">
+                            <form action="{% url 'certifications_par_categorie'  slug=catégorie.slug %}" method="get">
+                                <button type="submit">{{catégorie.titre}}</button>
+                            </form>
+                        </li>
+                        {%endfor%}
+                    </ul>
+                    <br>
+                    <br>
+                </div>
+
+                <div>
+                    <form method="GET">
+
+                        {{form}}
+                        <button type="submit">Rechercher</button>
+
+                    </form>
+                </div>
+                <br>
+
+                {% for certification in page_obj %}
+                    <div class="certification">
+                            {% if certification.image %}
+                                <a href="{% url 'certification_detail' certification.pk %}">
+                                    <img src="{{ certification.image.url }}" alt="{{ certification.titre }}"  class="logo">
+                                </a>
+
+                            {% endif %}<br>
+                       <div  class="certification-details" >
+                            <strong style="font-family: 'Inter', sans-serif;">{{certification.titre}}</strong> <br>
+
+
+                            <div class="price-add-to-cart">
+                                <p style="color:black">{{ certification.prix }} €</p>
+                                <div class="panier-icon-container">
+                                    <button class="Btn" onclick="redirectToPage('{% url 'certification_detail' certification.pk %}')">
+                                        <div class="sign">
+                                            <img src="{% static 'logo_et_fichier_caplogy/panier.png' %}" alt="Panier">
+                                        </div>
+                                        <div class="text">Ajouter au panier</div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                <br><br>
+                {%endfor%}
+            </div>
+
+            <div class="bon_examen">
+                <div>
+                    <h3>Autres produits</h3>
+                </div>
+
+                 {% for produit in autre_produit %}
+                    <div>
+                            {% if produit.image %}
+                                <a href="{% url 'produit_similaire_detail' produit.pk %}">
+                                    <img src="{{ produit.image.url }}"  class="logo">
+                                </a>
+                            {% endif %}<br>
+                        <div  >
+                            <strong style="font-family: 'Inter', sans-serif;">{{produit.titre}}</strong>  <br>
+                            {{produit.prix}} €
+
+                        </div>
+                    </div>
+                <br><br>
+                {%endfor%}
+
+        </div>
+
+
+    </div>
+
+        <div class="pagination">
+            <span class="step-links">
+
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; </a>
+                    <a href="?page={{ page_obj.previous_page_number }}">précédente</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">suivante</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+
+
+
+{%endblock%}
+
+{% block scripts %}
+    <script src="{% static 'js/script.js' %}"></script>
+
+
+{% endblock %}

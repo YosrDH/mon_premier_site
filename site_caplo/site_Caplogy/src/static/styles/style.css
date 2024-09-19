@@ -1,0 +1,919 @@
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/inter/v13/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa2JL7SUc.woff2) format('woff2');
+
+  }
+
+
+
+body {
+
+    background-image: url('/static/logo_et_fichier_caplogy/bk.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #cccccc;
+      font-family: 'Inter';
+}
+
+header {
+    display: flex; /* Définir le header comme un conteneur flex */
+    align-items: center; /* Aligner les éléments verticalement au centre */
+    justify-content: space-between; /* Espacer le logo et la navigation */
+    padding: 20px; /* Ajuster le padding selon vos besoins */
+}
+
+/* Styles du footer */
+footer {
+    background-color: rgba(0, 0, 0, 0);
+    padding: 20px 0;
+    border:solid;
+    border-width:0.01em;
+}
+
+/* Conteneur principal du footer */
+.footer_container_1,
+.footer_container_2 {
+    display: flex;
+    justify-content: space-between; /* Aligne les sections horizontalement avec espace entre elles */
+    align-items: flex-start; /* Aligne les sections en haut du conteneur */
+    padding: 0 50px; /* Ajustez selon vos besoins */
+}
+
+/* Styles pour chaque section du footer */
+footer section {
+    flex: 1; /* Chaque section prend un espace égal */
+    margin: 0 20px; /* Espacement entre les sections */
+}
+
+/* Styles spécifiques aux éléments de .footer_container_2 */
+#logo_footer {
+    display: flex;
+    align-items: center; /* Aligne le logo verticalement */
+    justify-content:center;
+}
+
+#rights {
+    display: flex;
+    align-items: center; /* Aligne le texte verticalement */
+    justify-content:center;
+    font-size: 14px; /* Taille de police ajustée */
+}
+
+/* Styles pour les liens dans le footer */
+footer a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Styles pour le texte */
+footer p {
+    margin: 5px 0;
+}
+
+/* Styles pour garantir que les sections du footer ne se chevauchent pas sur les petits écrans */
+@media (max-width: 768px) {
+    .footer_container_1,
+    .footer_container_2 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer section {
+        margin: 10px 0;
+    }
+}
+
+
+
+
+
+/*style réseaux sociaux*/
+.wrapper {
+  display: inline-flex;
+  list-style: none;
+  height: 120px;
+  width: 100%;
+  padding-top: 40px;
+  font-family: "Poppins", sans-serif;
+  justify-content: flex-start;
+  padding:10px;
+
+}
+
+.wrapper .icon {
+  position: relative;
+  background: #fff;
+  border-radius: 25%;
+  margin: 10px 2px;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip {
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  background: #fff;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: #fff;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper .facebook:hover,
+.wrapper .facebook:hover .tooltip,
+.wrapper .facebook:hover .tooltip::before {
+  background: #1877f2;
+  color: #fff;
+}
+
+.wrapper .linkedin:hover,
+.wrapper .linkedin:hover .tooltip,
+.wrapper .linkedin:hover .tooltip::before {
+  background: #0077b5; /* Couleur pour LinkedIn */
+  color: #fff;
+}
+
+
+.wrapper .instagram:hover,
+.wrapper .instagram:hover .tooltip,
+.wrapper .instagram:hover .tooltip::before {
+  background: #e4405f;
+  color: #fff;
+}
+
+
+/*les logos*/
+
+.logo {
+    max-width: 150px; /* Exemple : ajustez cette valeur selon la taille souhaitée pour vos logos */
+    height: auto; /* Pour conserver le ratio hauteur/largeur */
+    display: inline-block; /* Pour assurer que les images respectent les marges et les alignements */
+     image-rendering: -webkit-optimize-contrast; /* pour les navigateurs basés sur WebKit */
+    image-rendering: crisp-edges; /* pour les navigateurs modernes */
+    image-rendering: pixelated; /* pour les images pixélisées */
+}
+
+.logo_formateur{
+    max-width: 200px; /* Exemple : ajustez cette valeur selon la taille souhaitée pour vos logos */
+    height: auto; /* Pour conserver le ratio hauteur/largeur */
+    display: inline-block; /* Pour assurer que les images respectent les marges et les alignements */
+     image-rendering: -webkit-optimize-contrast; /* pour les navigateurs basés sur WebKit */
+    image-rendering: crisp-edges; /* pour les navigateurs modernes */
+    image-rendering: pixelated; /* pour les images pixélisées */
+}
+
+/* les logos*/
+.logo_img {
+    max-width: 100px; /* Ajustez cette valeur selon la taille souhaitée pour votre logo */
+    height: auto; /* Pour conserver le ratio hauteur/largeur */
+    display: block; /* Pour assurer que le logo respecte les marges et les alignements */
+    margin-right: 20px; /* Ajouter une marge à droite du logo si nécessaire */
+     image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+
+}
+
+.logo_top_rated{
+    max-width: 90px; /* Ajustez cette valeur selon la taille souhaitée pour votre logo */
+    height: auto; /* Pour conserver le ratio hauteur/largeur */
+    display: block; /* Pour assurer que le logo respecte les marges et les alignements */
+    margin-right: 20px; /* Ajouter une marge à droite du logo si nécessaire */
+     image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+
+}
+
+.img-detail_certif{
+    max-width: 200px; /* Ajustez cette valeur selon la taille souhaitée pour votre logo */
+    height: auto; /* Pour conserver le ratio hauteur/largeur */
+    display: block; /* Pour assurer que le logo respecte les marges et les alignements */
+    margin-right: 20px; /* Ajouter une marge à droite du logo si nécessaire */
+     image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+#logo_certiport{
+    max-width: 200px; /* Exemple : ajustez cette valeur selon la taille souhaitée pour vos logos */
+    height: auto; /* Pour conserver le ratio hauteur/largeur */
+    display: inline-block; /* Pour assurer que les images respectent les marges et les alignements */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+
+
+
+.nav-container {
+    display: flex;
+    justify-content: center; /* Centre le contenu horizontalement */
+    align-items:center;
+    padding:0 250px; /* Ajoute un espace autour de la div, si nécessaire */
+    position:fixed;
+    top:40px;
+    z-index: 1000;
+    background:white;
+    transition:top 0.3s
+
+}
+
+/* Aligner les éléments de la liste horizontalement */
+.nav-list {
+    list-style-type: none; /* Supprimer les puces des listes */
+    display: flex; /* Utiliser flexbox pour l'alignement */
+    margin: 0; /* Assurez-vous que la marge est réduite à 0 */
+    padding: 0; /* Réduire le padding à 0 */
+
+
+
+
+}
+
+
+.nav-item {
+    margin: 0 30px;/* Espacement horizontal entre les éléments */
+    display:flex;
+    align-items:center;
+}
+
+main {
+    padding-top: 100px; /* Ajustez cette valeur selon la hauteur de votre navigation */
+}
+
+.hidden {
+    display: none; /* Cache complètement l'élément */
+}
+
+
+/* Centrer le contenu de la div horizontalement */
+
+.container {
+    max-width: 1200px; /* Largeur maximale pour centrer le contenu */
+    margin: 0 auto; /* Centrage horizontal */
+
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.grid-item {
+    padding: 10px;
+
+
+}
+
+
+.flex-container {
+    display: flex;
+   flex-wrap: wrap;
+    gap: 20px;
+    justify-content:center;
+
+
+}
+
+.flex-container p {
+    margin: 0; /* Supprime la marge par défaut des paragraphes */
+    line-height: 1.5; /* Assure un espacement confortable des lignes */
+
+}
+
+
+
+.nav-link {
+    text-decoration: none; /* Supprimer le soulignement des liens */
+    color: black; /* Couleur du texte */
+}
+
+.nav-link:hover {
+
+    color: #5aa1e3;
+    text-decoration:underline;
+
+}
+
+
+
+
+.container_description {
+    display: flex; /* Utilisation de Flexbox pour aligner les éléments côte à côte */
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne suivante si nécessaire */
+    gap: 20px; /* Espacement entre les éléments */
+        }
+.description {
+            flex: 2; /* Le bon d'examen occupe 2/3 de l'espace disponible */
+            padding: 20px;
+            background-color: #eef1f6;
+            min-width: 300px;
+            overflow: hidden;
+            word-wrap: break-word;
+            max-width: 100%;
+            background-color:#F5F5F5;
+             border-radius:8px;
+
+        }
+.description pre, .description p {
+    word-wrap: break-word;
+    white-space: pre-wrap; /* Permet au texte de passer à la ligne */
+   font-family: 'Inter', sans-serif;
+}
+.bon_examen {
+            flex: 1; /* La description occupe 1/3 de l'espace disponible */
+            padding: 20px;
+            background-color: #eef1f6;
+            min-width: 300px;
+
+             border-radius:8px;
+        }
+
+
+
+
+
+/* Supprimer les puces des listes et appliquer Flexbox au conteneur parent */
+.programme-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Utiliser flexbox pour l'alignement horizontal */
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si nécessaire */
+}
+
+/* Styliser chaque élément de la liste */
+.programme-item {
+    margin-right: 10px; /* Espacement entre les éléments */
+}
+
+/* Styliser les boutons */
+.programme-item button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.programme-item button:hover {
+    background-color: skyblue;
+}
+
+
+
+.rating {
+ display: inline-block;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    float: right;
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+}
+
+.rating label:before {
+  content: '\2605';
+  font-size: 30px;
+ }
+
+.rating input:checked ~ label,
+    .rating label:hover,
+    .rating label:hover ~ label {
+    color: #6f00ff;
+    transition: color 0.3s;
+   }
+
+h1{
+    font-weight: bold;
+    margin-bottom: 5px;
+    color:white;
+     font-family: 'Inter', sans-serif;}
+
+h2{
+
+    margin-top: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size:25px;
+    color: #F5FFFA;
+}
+
+p{
+    color:white;
+     font-family: 'Inter', sans-serif;
+}
+
+hr {
+    margin:10px;
+    width: 100%;
+    margin-left: 0;
+}
+a,h3,h4,img,li,input,span,textarea,label,option,button,select{
+    font-family: 'Inter', sans-serif;
+    color: #51516e;
+    text-decoration: none;
+}
+
+
+/*style bouton*/
+button {
+  background-color: #FFFFFF;
+  border: 1px solid rgb(209,213,219);
+  border-radius: .5rem;
+  color: #111827;
+  font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  padding: .75rem 1rem;
+  text-align: center;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+button:hover {
+  background-color: #f9fafb;
+}
+
+button:focus {
+  outline: 2px solid rgba(0,0,0,0.1);
+  outline-offset: 2px;
+}
+
+button:focus-visible {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+
+.search-container{
+    display: flex;
+    justify-content: center;
+    margin: 20px;  /* Ajustez la marge selon vos besoins */}
+
+
+/* Style pour la barre de recherche */
+.search-bar {
+    width: 300px;  /* Ajustez la largeur selon vos besoins */
+    padding: 10px;  /* Ajustez le padding selon vos besoins */
+    border: 1px solid #ccc;  /* Ajustez la couleur de la bordure selon vos besoins */
+    border-radius: .5rem;  /* Ajoutez des coins arrondis */
+    outline: none;  /* Supprimez le contour par défaut lors de la mise au point */
+}
+
+#les-partenaires{
+    display: flex;
+    justify-content: center;
+
+    width:100%
+}
+
+.item-partenaire {
+    margin-right: 80px; /* Espacement entre les éléments */
+    height: auto;
+    max-width: 80px;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    transition: transform 0.5s ease-in-out;
+}
+
+.item-partenaire:hover {
+    transform: scale(1.5); /* Agrandit l'image de 20% */
+}
+
+/*pour la liste_formation*/
+
+.container_liste_formations {
+    display: flex;
+    padding20px;
+    justify-content:center;
+}
+
+.formations-container {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne suivante */
+    gap: 20px; /* Espacement entre les éléments */
+
+}
+
+.formation-item {
+    width: 22%; /* Chaque élément prend 22% de la largeur, ajusté pour l'espacement */
+    margin: 30px; /* Espacement entre les éléments */
+    box-sizing: border-box; /* Inclut la marge et le padding dans la largeur totale */
+}
+
+
+/*table*/
+.rounded-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 2px solid #333;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 50%;
+    margin: 20px auto;
+  }
+
+  .rounded-table th,
+  .rounded-table td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .rounded-table th:first-child {
+    border-top-left-radius: 15px;
+  }
+
+  .rounded-table th:last-child {
+    border-top-right-radius: 15px;
+  }
+
+  .rounded-table td:first-child:last-of-type {
+    border-bottom-left-radius: 15px;
+  }
+
+  .rounded-table td:last-child:last-of-type {
+    border-bottom-right-radius: 15px;
+  }
+
+
+
+  textarea {
+            width: 99%;
+            height: 150px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #333;
+            resize: vertical; /* permet de redimensionner uniquement verticalement */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s, box-shadow 0.3s; /* transition pour l'effet de focus */
+        }
+
+        textarea:focus {
+            border-color: #66afe9;
+            box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+            outline: none; /* retire le contour par défaut du navigateur */
+        }
+
+/*icone panier*/
+.panier-icon {
+
+        bottom: 35px; /* Ajuste selon l'espace désiré depuis le bas */
+        right: 1015px; /* Ajuste selon l'espace désiré depuis la droite */
+        max-width: 19px;
+        cursor: pointer;
+
+       }
+
+
+
+    .Btn {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 45px;
+        height: 45px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition-duration: .3s;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+
+    }
+
+    .sign {
+        width: 100%;
+        transition-duration: .3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sign img {
+        width: 17px;
+    }
+
+    .sign img path {
+        fill: white;
+    }
+
+    .text {
+        position: absolute;
+        right: 0%;
+        width: 0%;
+        opacity: 0;
+        color: #000080;
+        font-size: 1.2em;
+        font-weight: 600;
+        transition-duration: .3s;
+    }
+
+    .Btn:hover {
+        width: 125px;
+        border-radius: 40px;
+        transition-duration: .3s;
+
+    }
+
+    .Btn:hover .sign {
+        width: 30%;
+        transition-duration: .3s;
+        padding-left: 20px;
+    }
+
+    .Btn:hover .text {
+        opacity: 1;
+        width: 70%;
+        transition-duration: .3s;
+        padding-right: 10px;
+    }
+
+    .Btn:active {
+        transform: translate(2px, 2px);
+
+    }
+
+     .certification-details {
+        font-family: 'Inter', sans-serif;
+        color: black;
+    }
+
+/*pour aligner le bouton et le prix*/
+    .price-add-to-cart {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Espace entre le prix et le bouton */
+    }
+
+
+/*pour la pagination*/
+.pagination .step-links a{
+    color: white;
+    font-family: 'Inter', sans-serif;
+   font-size: 24px;
+  text-decoration:underline;
+
+
+
+    }
+
+.current{
+    color: white;
+    font-family: 'Inter', sans-serif;
+     font-size: 24px;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+}
+form .multiligne {
+    border: 1px solid #ccc;
+    border-radius: .5rem;
+    padding: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    height: 1.75em; /* Ajustez la hauteur pour s'aligner avec le bouton */
+    margin-right: 0.5rem; /* Espace entre l'input et le bouton */
+    flex-grow: 1; /* Permet à l'input de prendre l'espace disponible */
+}
+
+
+
+/*navigation*/
+
+nav{
+    width: 100%;
+    height: 100px;
+    /*background-color: rgba(205, 235, 240);*/
+    /*background-color: rgba(155, 216, 226, 0.5);*/
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: fixed;
+    border-bottom: solid #51516e 0.05px;
+    top:0;
+    z-index: 1000;
+    transition: height 0.3s;
+}
+
+nav.shrink {
+    height: 50px;
+    /*background-color: rgba(155, 216, 226, 0.5);*/
+
+}
+#caplogyLogo {
+    display: flex;
+    align-items: center;
+    transition: hieght 0.3s;
+}
+
+#caplogyLogo img{
+    height:100% ;
+    width: 100%;
+}
+
+nav .shrink  img{
+    height: 50px;
+}
+
+.menu_principale{
+    display:flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 700px;
+    margin-right: 50px;
+}
+.menu-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.menu-item a,.with_childs a{
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    top:50% ;
+}
+
+
+.menu_sec{
+    background-color: white;
+    display: none;
+    position: absolute;
+    top: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 0;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease-out;
+}
+nav .menu_principale li:hover .menu_sec {
+    display:block;
+    max-height: 200px;
+
+}
+
+.menu_sec a{
+    font-weight: lighter;
+}
+.menu_sec li{
+    width: 100%;
+    margin: 20px;
+    margin-bottom: 10px;
+ }
+.with_childs{
+    display: flex;
+    align-items: center;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-icon {
+    width: 40px;
+    height: 5px;
+    background-color: #51516e;
+    margin: 4px 0;
+
+}
+
+
+@media (max-width: 768px) {
+
+        .menu-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+
+        .menu_principale {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .menu_principale.show {
+            transform: translateX(0);
+        }
+
+        .menu_principale li {
+            margin: 20px 0;
+            font-size: 30px;
+        }
+
+        .close-menu {
+
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 30px;
+            color: #fff;
+
+        }
+
+        #caplogyLogo {
+            max-width:30% ;
+            height: 100%;
+        }
+
+}
+@media (min-width: 769px) {
+    .close-menu {
+        display: none;}
+
+
+
+/*footer*/
+
+footer{
+    bottom: 0;
+    height: auto;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+}
+

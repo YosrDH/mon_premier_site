@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>Liste des Formations</title>
+{% endblock %}
+
+{% block content %}
+    <h1 style="text-align:center;">Résultat de recherche pour: "{{ nom_formation }}"</h1>
+
+    <br><br><br>
+    <div class="container_liste_formations">
+        <div class="formations-container">
+            {% for formation in formations %}
+                <div class="formation-item">
+                    {% if formation.image %}
+                        <img src="{{ formation.image.url }}" alt="{{ formation.titre }}" class="logo">
+                    {% endif %}
+                    <h2>{{ formation.titre }}</h2>
+                    <p><img src="{% static 'logo_et_fichier_caplogy/lieu.png' %}" style="max-width: 19px;"><strong>  Lieu : {{ formation.lieu }}</strong></p>
+
+                    <p><img src="{% static 'logo_et_fichier_caplogy/calender.png' %}" style="max-width: 19px;">  Date:{{formation.date|date:"d/m/Y" }}</p>
+                    <button type="submit"  onclick="redirectToPage('{% url 'detail_formation' formation.id %}')">Réserver votre place</button>
+                </div>
+            {% empty %}
+                <p>Aucune formation trouvée avec le titre "{{ nom_formation }}"</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/script.js' %}"></script>
+
+
+{% endblock %}

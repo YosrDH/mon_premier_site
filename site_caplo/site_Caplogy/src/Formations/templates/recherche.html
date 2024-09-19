@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title%}
+    <title>Recherche Formation</title>
+{%endblock%}
+
+
+{%block content%}
+    <br>
+    <br>
+
+    <h1 style="text-align:center;">Trouver Votre Formation</h1>
+    <div class="search-container">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.nom_formation }}
+            <input type="hidden" name="formation_id" id="id_formation_id" value="{{ form.nom_formation.value }}">
+            <button type="submit">Rechercher</button>
+        </form>
+    </div>
+
+    <br><br>
+
+<div>
+    <h1 style="text-align:center;">Nos Partenaires</h1>
+    <br>
+    <div id="les-partenaires" style="background:white;">
+        <img src="{% static 'logo_et_fichier_caplogy/caplogy_education.png' %}" alt="Caplogy_education" class="logo item-partenaire">
+        <img src="{% static 'logo_et_fichier_caplogy/microsoft_logo.png' %}" alt="microsoft_logo" class="logo item-partenaire">
+        <img src="{% static 'logo_et_fichier_caplogy/ec_council_logo.png' %}" alt="ec_council_logo" class="logo item-partenaire">
+        <img src="{% static 'logo_et_fichier_caplogy/iso-logo.png' %}" alt="iso_logo" class="logo item-partenaire">
+        <img src="{% static 'logo_et_fichier_caplogy/amazon_web_logo.png' %}" alt="amazon_web_logo" class="logo item-partenaire">
+        <img src="{% static 'logo_et_fichier_caplogy/its-logo.png' %}" alt="its_logo" class="logo item-partenaire">
+        <img src="{% static 'logo_et_fichier_caplogy/cisco-logo.png' %}" alt="cisco_logo" class="logo item-partenaire">
+    </div>
+</div>
+
+    <br><br>
+
+    <div>
+        <h1 style="text-align:center;">Nos prochaines formations</h1>
+    </div>
+
+    <br>
+
+
+<br><br><br>
+
+    <div style="    display: flex; justify-content: center; ">
+        {% for formation in formations_avenir %}
+            <div style="display: inline-block; margin:20px">
+                {% if formation.image %}
+                    <img src="{{ formation.image.url }}" alt="{{ formation.titre }}" class="logo">
+                {% endif %}
+                <h2 >{{ formation.titre }}</h2>
+                <p><img src="{% static 'logo_et_fichier_caplogy/lieu.png' %}" style="max-width: 19px;"> <strong > Lieu : {{ formation.lieu }}</strong></p>
+
+                <p><img src="{% static 'logo_et_fichier_caplogy/calender.png' %}" style="max-width: 19px;">  Date:{{formation.date|date:"d/m/Y" }}</p>
+                <button type="submit"  onclick="redirectToPage('{% url 'detail_formation' formation.id %}')">Réserver votre place</button>
+
+
+
+            </div>
+        {% endfor %}
+
+    </div>
+
+<br><br>
+    <div>
+        <div><h1 style="text-align:center;">Accompagnez votre formation par une certification professionnelle </h1></div>
+        <br><br>
+        <div><button onclick="redirectToPage('{% url 'liste_certifications' %}')" style="display: block; margin: 0 auto; position: absolute;  left: 50%; transform: translate(-50%, -50%);">Boutique des certifications</button></div>
+    </div>
+
+    <br><br><br>
+
+    <div>
+
+
+
+
+
+
+
+<br><br><br><br><br>
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="{% static 'js/script.js' %}"></script>
+
+
+{% endblock %}
