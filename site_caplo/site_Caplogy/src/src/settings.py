@@ -13,14 +13,14 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import paypalrestsdk
 
-STRIPE_SECRET_KEY = 'sk_test_51PhYXEJbxEUnBpWupOiQ4ilbOaMYSivGkKay0gDLS4UP1IkR8pQp8vChrwiVlaQw7nKuLve5IbwaG0o9cy6YYruV00aledmbu9'
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51PhYXEJbxEUnBpWutyj1yqlQH9ZDbSoI8TNudDbuCHLqtMlIr7aCd6eOcHnBJBBEmPlIT3BAw1Mveg5fpEL08fQr00vrXKjfa2'
+STRIPE_SECRET_KEY = ''
+STRIPE_PUBLISHABLE_KEY = ''
 
 
 
 PAYPAL_MODE = 'sandbox'  # change 'sandbox' to 'live' for production
-PAYPAL_CLIENT_ID = 'AXO9mTnD7cWJx0rrQkMUrWFq62yoLd4uFZJST1746Gi-jb_DuwAHCqmBcmaj6lZtoj1KC9D9bVAtZDjI'
-PAYPAL_CLIENT_SECRET = 'ELJWHoWjSPKfAqlbNN1Rmx9N-GH_MP3_Q2cm8IGZCjzjmsDuhytoGGCf-XWdVft7-_qAWNZGpTOca4WR'
+PAYPAL_CLIENT_ID = ''
+PAYPAL_CLIENT_SECRET = ''
 
 paypalrestsdk.configure({
   "mode": PAYPAL_MODE,  # sandbox or live
